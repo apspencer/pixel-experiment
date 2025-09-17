@@ -13,7 +13,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/fireworks",
+      "source": "/in-place",
       "destination": "/index2.html"
     }
   ]

@@ -4,8 +4,8 @@ Interactive pixel animation experiments featuring two different explosion effect
 
 ## Live Demo
 
-🎆 **[In-Place Fireworks](https://pixel-experiment-cumskd8lx-andrew-spencer.vercel.app)** (Main)
-🌟 **[Radiating Arcs](https://pixel-experiment-cumskd8lx-andrew-spencer.vercel.app/radiating)** (Alternative)
+🎆 **[In-Place Fireworks](https://pixel-experiment-6fprf6n7l-andrew-spencer.vercel.app)** (Main)
+🌟 **[Radiating Arcs](https://pixel-experiment-6fprf6n7l-andrew-spencer.vercel.app/radiating)** (Alternative)
 
 ## Features
 
@@ -17,7 +17,7 @@ Interactive pixel animation experiments featuring two different explosion effect
 - Click anywhere to trigger
 
 ### Animation Type 2: In-Place Firework Explosion
-**URL**: `/` or `/fireworks` or `index2.html`
+**URL**: `/` or `/in-place` or `index2.html`
 - 6 distributed explosions across the canvas
 - 3-phase animation: single pixel → cross → expanded pattern
 - Realistic fade-out effect with maintained glow
