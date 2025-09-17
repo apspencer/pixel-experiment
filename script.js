@@ -547,22 +547,51 @@ function triggerInPlaceExplosion() {
 
 // Determine which animation to use based on the page
 function initializeAnimation() {
-    const isInPlaceAnimation = window.location.pathname.includes('index2') || 
-                              document.title.includes('In-Place');
+    const pathname = window.location.pathname;
+    const title = document.title;
+    const filename = pathname.split('/').pop() || 'index.html';
     
-    if (isInPlaceAnimation) {
-        // Use in-place explosion for index2.html
+    // Check for in-place animation indicators
+    const isInPlaceAnimation = filename.includes('index2') || 
+                              filename.includes('in-place') || 
+                              title.includes('In-Place') ||
+                              title.includes('Firework');
+    
+    // Check for radiating animation indicators  
+    const isRadiatingAnimation = filename.includes('index.html') ||
+                                filename.includes('radiating') ||
+                                title.includes('Radiating') ||
+                                title.includes('Arc');
+    
+    console.log('Animation Detection:', {
+        pathname,
+        filename,
+        title,
+        isInPlaceAnimation,
+        isRadiatingAnimation
+    });
+    
+    if (isInPlaceAnimation && !isRadiatingAnimation) {
+        // Use in-place explosion
+        console.log('Loading: In-Place Firework Explosions');
         document.addEventListener('click', triggerInPlaceExplosion);
         
-        // Auto-trigger in-place explosion after a short delay
         setTimeout(() => {
             triggerInPlaceExplosion();
         }, 1000);
-    } else {
-        // Use radiating explosion for index.html
+    } else if (isRadiatingAnimation || filename === 'index.html') {
+        // Use radiating explosion (default for index.html)
+        console.log('Loading: Radiating Arc Explosions');
         document.addEventListener('click', triggerExplosion);
         
-        // Auto-trigger radiating explosion after a short delay
+        setTimeout(() => {
+            triggerExplosion();
+        }, 1000);
+    } else {
+        // Fallback to radiating explosion
+        console.log('Loading: Default Radiating Arc Explosions');
+        document.addEventListener('click', triggerExplosion);
+        
         setTimeout(() => {
             triggerExplosion();
         }, 1000);

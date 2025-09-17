@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Animation Experiments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #070707;
+            color: #eeeeee;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #eeeeee;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #aaaaaa;
+        }
+
+        .animations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .animation-card {
+            background-color: #191919;
+            border: 2px solid #3a3a3a;
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .animation-card:hover {
+            border-color: #eeeeee;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(238, 238, 238, 0.1);
+        }
+
+        .animation-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #eeeeee;
+        }
+
+        .animation-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .animation-features {
+            list-style: none;
+            text-align: left;
+            color: #aaaaaa;
+            font-size: 0.9rem;
+        }
+
+        .animation-features li {
+            margin-bottom: 5px;
+        }
+
+        .animation-features li:before {
+            content: "• ";
+            color: #eeeeee;
+            margin-right: 5px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        .pixel-preview {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #eeeeee;
+            margin: 0 5px;
+            border-radius: 2px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .animations { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pixel Animation Experiments</h1>
+        <div class="subtitle">
+            Interactive <span class="pixel-preview"></span> pixel <span class="pixel-preview"></span> explosions with different effects
+        </div>
+
+        <div class="animations">
+            <a href="radiating.html" class="animation-card">
+                <div class="animation-title">🌟 Radiating Arc Explosions</div>
+                <div class="animation-description">
+                    14 pixels radiate outward from the center with beautiful curved trajectories
+                </div>
+                <ul class="animation-features">
+                    <li>Smooth arcing paths</li>
+                    <li>Physics-based movement</li>
+                    <li>5-second animation</li>
+                    <li>Click to trigger</li>
+                </ul>
+            </a>
+
+            <a href="in-place.html" class="animation-card">
+                <div class="animation-title">🎆 In-Place Firework Explosions</div>
+                <div class="animation-description">
+                    6 distributed explosions bloom and fade like real fireworks
+                </div>
+                <ul class="animation-features">
+                    <li>3-phase bloom animation</li>
+                    <li>Realistic fade-out effect</li>
+                    <li>Staggered timing</li>
+                    <li>Maintained glow effect</li>
+                </ul>
+            </a>
+        </div>
+
+        <div class="footer">
+            Click on any animation above to experience the pixel explosions<br>
+            Each animation is interactive - click anywhere to trigger new explosions
+        </div>
+    </div>
+</body>
+</html>

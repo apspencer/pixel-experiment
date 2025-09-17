@@ -4,20 +4,26 @@ Interactive pixel animation experiments featuring two different explosion effect
 
 ## Live Demo
 
-🎆 **[In-Place Fireworks](https://pixel-experiment-6fprf6n7l-andrew-spencer.vercel.app)** (Main)
-🌟 **[Radiating Arcs](https://pixel-experiment-6fprf6n7l-andrew-spencer.vercel.app/radiating)** (Alternative)
+### GitHub Pages (Unlimited Free Access)
+🏠 **[Main Hub](https://apspencer.github.io/pixel-experiment/index-main.html)** - Choose Your Animation  
+🎆 **[In-Place Fireworks](https://apspencer.github.io/pixel-experiment/in-place.html)** - Bloom & Fade Effect  
+🌟 **[Radiating Arcs](https://apspencer.github.io/pixel-experiment/radiating.html)** - Curved Trajectories  
+
+### Vercel (Limited Sharing)
+🎆 **[In-Place Fireworks](https://pixel-experiment-jo0s0npog-andrew-spencer.vercel.app)** (Main)
+🌟 **[Radiating Arcs](https://pixel-experiment-jo0s0npog-andrew-spencer.vercel.app/radiating)** (Alternative)
 
 ## Features
 
 ### Animation Type 1: Radiating Arc Explosion
-**URL**: `/radiating` or `index.html`
+**Files**: `radiating.html`, `index.html`
 - 14 pixels radiate outward from center with curved trajectories
 - Smooth arcing paths using physics-based movement
 - 5-second animation duration
 - Click anywhere to trigger
 
 ### Animation Type 2: In-Place Firework Explosion
-**URL**: `/` or `/in-place` or `index2.html`
+**Files**: `in-place.html`, `index2.html`
 - 6 distributed explosions across the canvas
 - 3-phase animation: single pixel → cross → expanded pattern
 - Realistic fade-out effect with maintained glow
