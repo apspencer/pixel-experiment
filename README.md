@@ -6,34 +6,34 @@ Interactive pixel animation experiments featuring two different explosion effect
 
 ### GitHub Pages (Unlimited Free Access)
 🏠 **[Main Hub](https://apspencer.github.io/pixel-experiment/index-main.html)** - Choose Your Animation  
-🔄 **[Morphing Patterns](https://apspencer.github.io/pixel-experiment/morphing.html)** - Shape-Shifting Explosions  
-🎆 **[In-Place Fireworks](https://apspencer.github.io/pixel-experiment/in-place.html)** - Bloom & Fade Effect  
+🔄 **[Morphing Patterns](https://apspencer.github.io/pixel-experiment/morphing.html)** - Shape-Shifting Animations  
+🎆 **[In-Place](https://apspencer.github.io/pixel-experiment/in-place.html)** - Bloom & Fade Effect  
 🌟 **[Radiating Arcs](https://apspencer.github.io/pixel-experiment/radiating.html)** - Curved Trajectories  
 
 ### Vercel (Limited Sharing)
-🎆 **[In-Place Fireworks](https://pixel-experiment-jo0s0npog-andrew-spencer.vercel.app)** (Main)
+🎆 **[In-Place](https://pixel-experiment-jo0s0npog-andrew-spencer.vercel.app)** (Main)
 🌟 **[Radiating Arcs](https://pixel-experiment-jo0s0npog-andrew-spencer.vercel.app/radiating)** (Alternative)
 
 ## Features
 
-### Animation Type 1: Morphing Pattern Explosion
+### Animation Type 1: Morphing Patterns
 **Files**: `morphing.html`
-- 8 scattered explosions across the canvas
+- 8 scattered animations across the canvas
 - 3-frame morphing sequence: square → plus → diamond
-- Each pattern repeats twice (0.6 seconds per explosion)
+- Each pattern repeats twice (0.6 seconds per animation)
 - Staggered cascade timing with 2-frame delays
 - Precise color control with lightest/mid pixel values
 
-### Animation Type 2: Radiating Arc Explosion
+### Animation Type 2: Radiating Arc
 **Files**: `radiating.html`, `index.html`
 - 14 pixels radiate outward from center with curved trajectories
 - Smooth arcing paths using physics-based movement
 - 5-second animation duration
 - Click anywhere to trigger
 
-### Animation Type 3: In-Place Firework Explosion
+### Animation Type 3: In-Place
 **Files**: `in-place.html`, `index2.html`
-- 6 distributed explosions across the canvas
+- 6 distributed animations across the canvas
 - 3-phase animation: single pixel → cross → expanded pattern
 - Realistic fade-out effect with maintained glow
 - Staggered timing for wave effect

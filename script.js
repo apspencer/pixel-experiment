@@ -764,14 +764,12 @@ function initializeAnimation() {
     
     // Check for morphing animation indicators
     const isMorphingAnimation = filename.includes('morphing') ||
-                               title.includes('Morphing') ||
-                               title.includes('Patterns');
+                               title.includes('Morphing');
     
     // Check for in-place animation indicators
     const isInPlaceAnimation = filename.includes('index2') || 
                               filename.includes('in-place') || 
-                              title.includes('In-Place') ||
-                              title.includes('Firework');
+                              title.includes('In-Place');
     
     // Check for radiating animation indicators  
     const isRadiatingAnimation = filename.includes('index.html') ||
@@ -789,32 +787,32 @@ function initializeAnimation() {
     });
     
     if (isMorphingAnimation) {
-        // Use morphing explosion
-        console.log('Loading: Morphing Pattern Animation');
+        // Use morphing animation
+        console.log('Loading: Morphing Animation');
         document.addEventListener('click', triggerMorphingExplosion);
         
         setTimeout(() => {
             triggerMorphingExplosion();
         }, 1000);
     } else if (isInPlaceAnimation && !isRadiatingAnimation) {
-        // Use in-place explosion
-        console.log('Loading: In-Place Firework Explosions');
+        // Use in-place animation
+        console.log('Loading: In-Place Animation');
         document.addEventListener('click', triggerInPlaceExplosion);
         
         setTimeout(() => {
             triggerInPlaceExplosion();
         }, 1000);
     } else if (isRadiatingAnimation || filename === 'index.html') {
-        // Use radiating explosion (default for index.html)
-        console.log('Loading: Radiating Arc Explosions');
+        // Use radiating animation (default for index.html)
+        console.log('Loading: Radiating Arc Animation');
         document.addEventListener('click', triggerExplosion);
         
         setTimeout(() => {
             triggerExplosion();
         }, 1000);
     } else {
-        // Fallback to radiating explosion
-        console.log('Loading: Default Radiating Arc Explosions');
+        // Fallback to radiating animation
+        console.log('Loading: Default Radiating Arc Animation');
         document.addEventListener('click', triggerExplosion);
         
         setTimeout(() => {
