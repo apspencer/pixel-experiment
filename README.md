@@ -4,17 +4,20 @@ Interactive pixel animation experiments featuring two different explosion effect
 
 ## Live Demo
 
-🎆 **[View Live Demo](https://your-deployment-url.vercel.app)**
+🎆 **[In-Place Fireworks](https://pixel-experiment-cumskd8lx-andrew-spencer.vercel.app)** (Main)
+🌟 **[Radiating Arcs](https://pixel-experiment-cumskd8lx-andrew-spencer.vercel.app/radiating)** (Alternative)
 
 ## Features
 
-### Animation Type 1: Radiating Arc Explosion (`index.html`)
+### Animation Type 1: Radiating Arc Explosion
+**URL**: `/radiating` or `index.html`
 - 14 pixels radiate outward from center with curved trajectories
 - Smooth arcing paths using physics-based movement
 - 5-second animation duration
 - Click anywhere to trigger
 
-### Animation Type 2: In-Place Firework Explosion (`index2.html`)
+### Animation Type 2: In-Place Firework Explosion
+**URL**: `/` or `/fireworks` or `index2.html`
 - 6 distributed explosions across the canvas
 - 3-phase animation: single pixel → cross → expanded pattern
 - Realistic fade-out effect with maintained glow

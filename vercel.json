@@ -7,6 +7,14 @@
     {
       "source": "/",
       "destination": "/index2.html"
+    },
+    {
+      "source": "/radiating",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/fireworks",
+      "destination": "/index2.html"
     }
   ]
 }
