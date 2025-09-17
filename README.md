@@ -6,6 +6,7 @@ Interactive pixel animation experiments featuring two different explosion effect
 
 ### GitHub Pages (Unlimited Free Access)
 🏠 **[Main Hub](https://apspencer.github.io/pixel-experiment/index-main.html)** - Choose Your Animation  
+🔄 **[Morphing Patterns](https://apspencer.github.io/pixel-experiment/morphing.html)** - Shape-Shifting Explosions  
 🎆 **[In-Place Fireworks](https://apspencer.github.io/pixel-experiment/in-place.html)** - Bloom & Fade Effect  
 🌟 **[Radiating Arcs](https://apspencer.github.io/pixel-experiment/radiating.html)** - Curved Trajectories  
 
@@ -15,14 +16,22 @@ Interactive pixel animation experiments featuring two different explosion effect
 
 ## Features
 
-### Animation Type 1: Radiating Arc Explosion
+### Animation Type 1: Morphing Pattern Explosion
+**Files**: `morphing.html`
+- 8 scattered explosions across the canvas
+- 3-frame morphing sequence: square → plus → diamond
+- Each pattern repeats twice (0.6 seconds per explosion)
+- Staggered cascade timing with 2-frame delays
+- Precise color control with lightest/mid pixel values
+
+### Animation Type 2: Radiating Arc Explosion
 **Files**: `radiating.html`, `index.html`
 - 14 pixels radiate outward from center with curved trajectories
 - Smooth arcing paths using physics-based movement
 - 5-second animation duration
 - Click anywhere to trigger
 
-### Animation Type 2: In-Place Firework Explosion
+### Animation Type 3: In-Place Firework Explosion
 **Files**: `in-place.html`, `index2.html`
 - 6 distributed explosions across the canvas
 - 3-phase animation: single pixel → cross → expanded pattern

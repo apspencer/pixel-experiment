@@ -542,6 +542,217 @@ function triggerInPlaceExplosion() {
 }
 
 // ==========================================
+// ANIMATION TYPE 3: MORPHING PATTERNS
+// ==========================================
+
+// Morphing animation manager
+let morphingExplosionsActive = false;
+let morphingAnimationFrameId = null;
+let activeMorphingExplosions = [];
+
+// Class for managing morphing pattern animation
+class MorphingExplosion {
+    constructor(centerRow, centerCol) {
+        this.centerRow = centerRow;
+        this.centerCol = centerCol;
+        this.phase = 0; // 0: square, 1: cross, 2: diamond
+        this.frameCount = 0;
+        this.active = true;
+        
+        // Pattern definitions for each phase - exactly as shown in images
+        this.patterns = {
+            0: [ // 3x3 square pattern (9 pixels) - Image 4.1
+                [-1, -1], [-1, 0], [-1, 1],
+                [0, -1],  [0, 0],  [0, 1],
+                [1, -1],  [1, 0],  [1, 1]
+            ],
+            1: [ // Plus/cross pattern (5 pixels) - Image 4.2 left
+                [0, 0],   // Center
+                [-1, 0],  // Up
+                [1, 0],   // Down
+                [0, -1],  // Left
+                [0, 1]    // Right
+            ],
+            2: [ // Diamond pattern (4 pixels) - Image 4.2 right - NO center pixel
+                [-1, -1],   // Top-left diagonal
+                [-1, 1],    // Top-right diagonal
+                [1, -1],    // Bottom-left diagonal
+                [1, 1]      // Bottom-right diagonal
+            ]
+        };
+    }
+    
+    update() {
+        if (!this.active) return;
+        
+        // Skip if we haven't reached start time yet
+        if (this.frameCount < 0) {
+            this.frameCount++;
+            return;
+        }
+        
+        // Clear previous pattern
+        this.clearCurrentPattern();
+        
+        // Phase timing - 0.10 seconds per frame, repeats twice (6 frames per phase at 60fps)
+        const cycleFrame = this.frameCount % 18; // Each cycle is 18 frames (0.3 seconds)
+        
+        if (this.frameCount < 36) { // Two complete cycles (36 frames = 0.6 seconds total)
+            if (cycleFrame < 6) {
+                // Phase 0: 3x3 square (frames 0-5, 18-23)
+                this.phase = 0;
+            } else if (cycleFrame < 12) {
+                // Phase 1: Plus pattern (frames 6-11, 24-29)
+                this.phase = 1;
+            } else {
+                // Phase 2: Diamond pattern (frames 12-17, 30-35)
+                this.phase = 2;
+            }
+        } else {
+            // Animation ends after two complete cycles
+            this.active = false;
+        }
+        
+        // Display current pattern (only if we've started)
+        if (this.frameCount >= 0) {
+            this.displayCurrentPattern();
+        }
+        
+        this.frameCount++;
+    }
+    
+    displayCurrentPattern() {
+        if (this.phase === 0) {
+            // Frame 1: 3x3 square - 9 lightest pixels with mid glow
+            this.patterns[0].forEach(([rowOffset, colOffset]) => {
+                const row = this.centerRow + rowOffset;
+                const col = this.centerCol + colOffset;
+                illuminatePixel(row, col, '#eeeeee'); // Lightest
+            });
+            // Add mid glow around the 3x3 square
+            for (let rowOffset = -2; rowOffset <= 2; rowOffset++) {
+                for (let colOffset = -2; colOffset <= 2; colOffset++) {
+                    // Skip the center 3x3 area (already lit)
+                    if (Math.abs(rowOffset) <= 1 && Math.abs(colOffset) <= 1) continue;
+                    // Only illuminate edge pixels of the 5x5 area
+                    if (Math.abs(rowOffset) === 2 || Math.abs(colOffset) === 2) {
+                        const row = this.centerRow + rowOffset;
+                        const col = this.centerCol + colOffset;
+                        illuminatePixel(row, col, '#3a3a3a'); // Mid
+                    }
+                }
+            }
+        } else if (this.phase === 1) {
+            // Frame 2: Plus pattern - 5 lightest pixels with mid glow
+            this.patterns[1].forEach(([rowOffset, colOffset]) => {
+                const row = this.centerRow + rowOffset;
+                const col = this.centerCol + colOffset;
+                illuminatePixel(row, col, '#eeeeee'); // Lightest
+            });
+            // Add mid glow around plus pattern
+            const glowPositions = [
+                [-1, -1], [-1, 1], [1, -1], [1, 1], // Diagonals
+                [-2, 0], [2, 0], [0, -2], [0, 2]    // Extended arms
+            ];
+            glowPositions.forEach(([rowOffset, colOffset]) => {
+                const row = this.centerRow + rowOffset;
+                const col = this.centerCol + colOffset;
+                illuminatePixel(row, col, '#3a3a3a'); // Mid
+            });
+        } else if (this.phase === 2) {
+            // Frame 3: Diamond pattern - 4 lightest diagonals + center mid + mid glow
+            this.patterns[2].forEach(([rowOffset, colOffset]) => {
+                const row = this.centerRow + rowOffset;
+                const col = this.centerCol + colOffset;
+                illuminatePixel(row, col, '#eeeeee'); // Lightest (diagonals)
+            });
+            // Center pixel is mid (not lightest)
+            illuminatePixel(this.centerRow, this.centerCol, '#3a3a3a'); // Mid
+            // Add mid glow around diamond
+            const glowPositions = [
+                [-1, 0], [1, 0], [0, -1], [0, 1] // Cardinal directions
+            ];
+            glowPositions.forEach(([rowOffset, colOffset]) => {
+                const row = this.centerRow + rowOffset;
+                const col = this.centerCol + colOffset;
+                illuminatePixel(row, col, '#3a3a3a'); // Mid
+            });
+        }
+    }
+    
+    clearCurrentPattern() {
+        // Clear a 5x5 area around the center (covers all possible patterns and glow)
+        for (let rowOffset = -2; rowOffset <= 2; rowOffset++) {
+            for (let colOffset = -2; colOffset <= 2; colOffset++) {
+                const row = this.centerRow + rowOffset;
+                const col = this.centerCol + colOffset;
+                clearIllumination(row, col);
+            }
+        }
+    }
+    
+    isActive() {
+        return this.active;
+    }
+    
+    cleanup() {
+        this.clearCurrentPattern();
+    }
+}
+
+// Create multiple morphing explosions
+function createMorphingExplosions() {
+    if (morphingExplosionsActive) return;
+    
+    // Generate 8 well-distributed positions
+    const positions = generateDistributedPositions(8);
+    
+    // Create explosions with staggered start times
+    positions.forEach((pos, index) => {
+        const explosion = new MorphingExplosion(pos.row, pos.col);
+        
+        // Stagger the start of each explosion slightly for more organic feel
+        explosion.startDelay = index * 2; // 2 frame delay between each explosion
+        explosion.frameCount = -explosion.startDelay; // Start with negative frame count
+        
+        activeMorphingExplosions.push(explosion);
+    });
+    
+    morphingExplosionsActive = true;
+    
+    function animate() {
+        // Update all active explosions
+        activeMorphingExplosions.forEach(explosion => explosion.update());
+        
+        // Remove finished explosions
+        activeMorphingExplosions = activeMorphingExplosions.filter(explosion => {
+            if (!explosion.isActive()) {
+                explosion.cleanup();
+                return false;
+            }
+            return true;
+        });
+        
+        // Continue animation if there are still active explosions
+        if (activeMorphingExplosions.length > 0) {
+            morphingAnimationFrameId = requestAnimationFrame(animate);
+        } else {
+            morphingExplosionsActive = false;
+            morphingAnimationFrameId = null;
+        }
+    }
+    
+    animate();
+}
+
+// Trigger morphing explosions
+function triggerMorphingExplosion() {
+    if (pixelsPerRow > 0 && pixelsPerColumn > 0 && !morphingExplosionsActive) {
+        createMorphingExplosions();
+    }
+}
+
+// ==========================================
 // ANIMATION SELECTION AND INITIALIZATION
 // ==========================================
 
@@ -550,6 +761,11 @@ function initializeAnimation() {
     const pathname = window.location.pathname;
     const title = document.title;
     const filename = pathname.split('/').pop() || 'index.html';
+    
+    // Check for morphing animation indicators
+    const isMorphingAnimation = filename.includes('morphing') ||
+                               title.includes('Morphing') ||
+                               title.includes('Patterns');
     
     // Check for in-place animation indicators
     const isInPlaceAnimation = filename.includes('index2') || 
@@ -567,11 +783,20 @@ function initializeAnimation() {
         pathname,
         filename,
         title,
+        isMorphingAnimation,
         isInPlaceAnimation,
         isRadiatingAnimation
     });
     
-    if (isInPlaceAnimation && !isRadiatingAnimation) {
+    if (isMorphingAnimation) {
+        // Use morphing explosion
+        console.log('Loading: Morphing Pattern Animation');
+        document.addEventListener('click', triggerMorphingExplosion);
+        
+        setTimeout(() => {
+            triggerMorphingExplosion();
+        }, 1000);
+    } else if (isInPlaceAnimation && !isRadiatingAnimation) {
         // Use in-place explosion
         console.log('Loading: In-Place Firework Explosions');
         document.addEventListener('click', triggerInPlaceExplosion);
