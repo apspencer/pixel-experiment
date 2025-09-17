@@ -1,0 +1,13 @@
+{
+  "name": "pixel-experiment",
+  "version": "1.0.0",
+  "description": "Interactive pixel animation experiments with radiating and in-place explosions",
+  "main": "index2.html",
+  "scripts": {
+    "start": "python3 -m http.server 3000",
+    "dev": "python3 -m http.server 3000"
+  },
+  "keywords": ["animation", "pixels", "canvas", "fireworks", "javascript"],
+  "author": "Andrew Spencer",
+  "license": "MIT"
+}
